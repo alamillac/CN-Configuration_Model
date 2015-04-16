@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <title>Complex Networks</title>
+        <meta charset="utf-8" />
+        <script src="public/js/lib/jquery.js"></script>
+        <script src="public/js/lib/sigma.min.js"></script>
+        <script src="public/js/lib/randgen.js"></script>
+        <script src="public/js/cn.js"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <link rel="stylesheet" href="public/css/main.css">
+    </head>
+    <body>
+        <main id="container">
+            <section class="box">
+                <header class="title center">
+                    <h1>Complex Network exercise</h1>
+                    <div>by Andrés Lamilla</div>
+                </header>
+                <form class="center" id="network-form">
+                    <fieldset>
+                        <legend>Network information</legend>
+                        <p>
+                            <label>Number of nodes:
+                                <input type="number" name="num-nodes" placeholder="eg. 1000" value="500" min="10" autofocus required>
+                            </label>
+                        </p>
+                        <p>
+                            <label for="degree">Degree distribution:</label>
+                            <select id="degree" name="degree">
+                                <option value="0">Poisson</option>
+                                <option value="1">Power-law</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label id="degreeHelperLabel" for="degreeHelper">Lambda:</label>
+                            <input id="degreeHelper" type="number" name="degree-helper" placeholder="eg. 5" value="5" min="1" max="100" step="1" required>
+                        </p>
+                    </fieldset>
+                    <button id="sendFormBtn">Get it!</button>
+                </form>
+                <a download="cn_ex1.net" id="downloadlink" class="center" style="display: none">Download network</a>
+                <section class="histogram center box">
+                    <header class="center">
+                        <h3>Histogram</h3>
+                    </header>
+                    <div id="chartPDF"></div>
+                    <a id="downloadChartPDF" href="">Get image of PDF Histogram</a>
+
+                    <div id="chartCCDF"></div>
+                    <a id="downloadChartCCDF" href="">Get image of CCDF Histogram</a>
+                </section>
+                <section class="_graph-box box">
+                    <header class="center">
+                        <h3>Graph</h3>
+                    </header>
+                    <p class="center">This graph is only displayed for values of N lower than 1500</p>
+                    <div id="network"></div>
+                    <div class="center"><a target="_blank" href="http://sigmajs.org/">Sigma</a> library is being used to draw the network.</div>
+                </section>
+            </section>
+        </main>
+        <div id="infoModal" class="modalDialog">
+            <div>
+                <h2>Wait</h2>
+                <p>The network is being created.</p>
+                <p><span id="numEdges">0</span> edges remaining to connect.</p>
+            </div>
+        </div>
+        <script>
+            CN.init({
+                'complex_network_id': 'network',
+                'name_num_nodes': 'num-nodes',
+                'name_distribution': 'degree',
+                'name_distribution_arg': 'degree-helper',
+                'btn_form': '#sendFormBtn',
+                'sel_degree_helper_label': '#degreeHelperLabel',
+                'sel_distribution': '#degree',
+                'sel_degree_helper': '#degreeHelper'
+            });
+        </script>
+    </body>
+</html>
